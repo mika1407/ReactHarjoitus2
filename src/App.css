@@ -1,0 +1,99 @@
+h3 {
+  text-align: right;
+  margin-right: 24%;
+  font-stretch: extra-condensed;
+  cursor: pointer;
+}
+
+.App {
+  text-align: center;
+  font-size: 22px;
+  color: #212329;
+  margin-left: 0%;
+  margin-right: 0%;
+  min-height: 700px;
+  background-color: white;
+}
+
+button {
+  margin: 10px;
+  font-size: 18px;
+  height: 55px;
+  width: 150px;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 1px 1px 0px 2px rgba (0, 0, 0, 0.3);
+  background: rgb(141, 217, 252);
+  cursor: pointer;
+}
+
+.App-header {
+  background-color: #4768a8;
+  height: 15%;
+  width: 100%;
+  font-size: 25px;
+  color: white;
+}
+
+table {
+  margin-left: 15%;
+}
+
+table,
+th,
+td {
+  border-color: gray;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 18px;
+}
+
+.customerWindow {
+  background-color: #c5c5c5;
+  border-style: solid;
+  width: 60%;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.kello {
+  margin-left: 30%;
+  margin-top: 10px;
+}
+
+form {
+  margin-left: 20%;
+  border-style: solid;
+  border-color: lightgray;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  width: 60%;
+  background: rgb(71, 71, 71);
+  border-radius: 7px;
+}
+
+input {
+  height: 30px;
+  width: 50%;
+  margin-bottom: 6px;
+}
+
+.neg {
+  color: red;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.pos {
+  color: rgb(87, 97, 102);
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
