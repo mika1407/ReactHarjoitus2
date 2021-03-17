@@ -3,13 +3,16 @@ import './App.css'
 import CustomerService from './services/customer'
 import Customer from './Customer'
 import CustomerAdd from './CustomerAdd'
+import CustomerEdit from './CustomerEdit'
 
 const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
 
-    const [customers, setCustomers] = useState([])
+    const [customers, setCustomers] = useState([]) // taulukollinen customer olioita
     const [näytetäänkö, setNäytetäänkö] = useState(false)
     const [search, setSearch] = useState("")
     const [lisäysTila, setLisäystila] = useState(false)
+    const [muokkausTila, setMuokkaustila] = useState(false)
+    const [muokattavaCustomer, setMuokattavaCustomer] = useState({}) // yksi customer olio
 
     useEffect(() => {
         CustomerService
@@ -18,14 +21,14 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
                 console.log(data)
                 setCustomers(data)
             })
-    }, [näytetäänkö])
+    }, [lisäysTila, näytetäänkö, muokkausTila])
 
     //Hakukentän onChange tapahtumankäsittelijä
     const handleSearchInputChange = (event) => {
-        console.log(search)
         setNäytetäänkö(true)
         setSearch(event.target.value.toLowerCase())
     }
+
 
     // Poisto on nyt korjattu (14.3.2021)
 
@@ -49,7 +52,6 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
                         setMessage(`${customer.companyName}:n poisto onnistui!`)
                         setIsPositive(true)
                         setShowMessage(true)
-                        setNäytetäänkö(false)
                         window.scrollBy(0, -10000) // Scrollataan ylös jotta nähdään alert :)
 
                         setTimeout(() => {
@@ -61,6 +63,7 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
                 })
 
                 .catch(error => {
+                    console.log(error)
                     setMessage(`Tapahtui virhe: ${error}. Onkohan asiakkaalla tilauksia?`)
                     setIsPositive(false)
                     setShowMessage(true)
@@ -84,24 +87,33 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
         }
     }
 
+    //EDIT buttonin tapahtumankäsittelijä saa parametrin customer componentista
+    const handleEditClick = customer => {
+        console.log(customer)
+        setMuokattavaCustomer(customer)
+        setMuokkaustila(true)
+
+    }
+
     return (
         <>
-            <h1 style={{ cursor: 'pointer' }}
-                onClick={() => setNäytetäänkö(!näytetäänkö)}> customers
-            <button onClick={() => setLisäystila(true)}>Add new</button>
-            </h1>
+            <h1><nobr style={{ cursor: 'pointer' }}
+                onClick={() => setNäytetäänkö(!näytetäänkö)}> Customers</nobr>
 
-            {!lisäysTila &&
+                <button onClick={() => setLisäystila(true)}>Add new</button></h1>
+
+
+            {!lisäysTila && !muokkausTila &&
                 <input placeholder="Search by company name" value={search} onChange={handleSearchInputChange} />
             }
 
             {
-                customers && näytetäänkö === true && lisäysTila === false && customers.map(customer => {
+                customers && näytetäänkö && !lisäysTila && !muokkausTila && customers.map(customer => {
                     const lowerCaseName = customer.companyName.toLowerCase()
                     if (lowerCaseName.indexOf(search) > -1) {
                         return (
                             <Customer key={customer.customerId} customer={customer}
-                                handleDeleteClick={handleDeleteClick} />
+                                handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick} />
                         )
                     }
                 }
@@ -111,6 +123,9 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
             { !customers && <p>Loading...</p>}
 
             {lisäysTila && <CustomerAdd setLisäystila={setLisäystila} customers={customers} setCustomers={setCustomers} setMessage={setMessage} setShowMessage={setShowMessage}
+                setIsPositive={setIsPositive} />}
+
+            {muokkausTila && <CustomerEdit setMuokkaustila={setMuokkaustila} muokattavaCustomer={muokattavaCustomer} customers={customers} setCustomers={setCustomers} setMessage={setMessage} setShowMessage={setShowMessage}
                 setIsPositive={setIsPositive} />}
 
         </>
