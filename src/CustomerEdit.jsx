@@ -75,7 +75,7 @@ const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, se
 
     setTimeout(() => {
       setMuokkaustila(false)
-    }, 500
+    }, 800
     )
         
 
@@ -89,8 +89,8 @@ const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, se
             {/* inputien tapahtumankäsittelijöissä on määritelty funktio, jotka saa parametrikseen kyseisen
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
             <div>
-                <input type="text" value={newCustomerId} placeholder="ID with 5 capital letters" maxLength="5" minLength="5"
-                    onChange={({ target }) => setNewCustomerId(target.value)} required />
+                <p>ID field cannot be edited</p>
+                <input type="text" value={newCustomerId} />
             </div>
             <div>
                 <input type="text" value={newCompanyName} placeholder="Company name"

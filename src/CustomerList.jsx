@@ -4,8 +4,9 @@ import CustomerService from './services/customer'
 import Customer from './Customer'
 import CustomerAdd from './CustomerAdd'
 import CustomerEdit from './CustomerEdit'
+import Message from './Message'
 
-const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
+const CustomerList = () => {
 
     const [customers, setCustomers] = useState([]) // taulukollinen customer olioita
     const [näytetäänkö, setNäytetäänkö] = useState(false)
@@ -13,6 +14,10 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
     const [lisäysTila, setLisäystila] = useState(false)
     const [muokkausTila, setMuokkaustila] = useState(false)
     const [muokattavaCustomer, setMuokattavaCustomer] = useState({}) // yksi customer olio
+
+    const [showMessage, setShowMessage] = useState(false)
+    const [isPositive, setIsPositive] = useState(false)
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         CustomerService
@@ -89,7 +94,7 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
 
     //EDIT buttonin tapahtumankäsittelijä saa parametrin customer componentista
     const handleEditClick = customer => {
-        console.log(customer)
+        //console.log(customer)
         setMuokattavaCustomer(customer)
         setMuokkaustila(true)
 
@@ -100,13 +105,17 @@ const CustomerList = ({ setMessage, setShowMessage, setIsPositive }) => {
             <h1><nobr style={{ cursor: 'pointer' }}
                 onClick={() => setNäytetäänkö(!näytetäänkö)}> Customers</nobr>
 
-                <button onClick={() => setLisäystila(true)}>Add new</button></h1>
+                <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
 
-
+            
             {!lisäysTila && !muokkausTila &&
                 <input placeholder="Search by company name" value={search} onChange={handleSearchInputChange} />
             }
 
+            { showMessage &&
+                <Message message={message} isPositive={isPositive}/>
+            }
+                
             {
                 customers && näytetäänkö && !lisäysTila && !muokkausTila && customers.map(customer => {
                     const lowerCaseName = customer.companyName.toLowerCase()
