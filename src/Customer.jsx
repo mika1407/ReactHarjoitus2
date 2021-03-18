@@ -10,8 +10,16 @@ const [näytäEnemmän, setNäytäEnemmän] = useState(false)
 
 return (
     <>
-      <h3 onClick={() => setNäytäEnemmän(!näytäEnemmän)}>   
-        {customer.companyName} 
+    <h3><nobr
+            onMouseOver={() => setNäytäEnemmän(true)}
+            onMouseLeave={() => setNäytäEnemmän(false)}
+        >
+            {customer.companyName}
+
+        </nobr>
+
+      {/* <h3 onClick={() => setNäytäEnemmän(!näytäEnemmän)}>   
+        {customer.companyName}  */}
         
         <button className="nappi" onClick={() => handleDeleteClick(customer.customerId)} >Delete</button>
 

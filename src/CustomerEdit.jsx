@@ -89,7 +89,7 @@ const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, se
             {/* inputien tapahtumankäsittelijöissä on määritelty funktio, jotka saa parametrikseen kyseisen
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
             <div>
-                <p>ID field cannot be edited</p>
+                <p style={{ color: 'white' }}>ID field cannot be edited</p>
                 <input type="text" value={newCustomerId} />
             </div>
             <div>
@@ -129,9 +129,10 @@ const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, se
                     onChange={({ target }) => setNewFax(target.value)} />
             </div>
 
-            <button type="submit" style={{ background: 'green' }}>Save</button>
+            <button className="nappi" type="submit" >Save</button>  
+            {/* poistettu: style={{ background: 'green' }} */}
 
-            <button onClick={() => setMuokkaustila(false)} style={{ background: 'red' }}>
+            <button className="nappi" onClick={() => setMuokkaustila(false)} style={{ background: 'red' }}>
                 Cancel</button>
         </form>
     )

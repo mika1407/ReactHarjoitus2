@@ -3,7 +3,7 @@ import './App.css';
 /*import Laskuri from './laskuri'*/
 import CustomerList from './CustomerList'
 import Kello from './Kello'
-import Message from './Message'
+// import Message from './Message'
 import LoginList from './LoginList'
 import ProductList from './ProductList'
 import EmployeeList from './EmployeeList'
@@ -28,12 +28,13 @@ const [clock, setClock] = useState(false)
   return (
     <div className="App">
       <header className="App-header">
-        <h1 onClick={() => setClock(!clock)} style={{ cursor: 'pointer'}} >Northwind 2021</h1>   {/*lisätty: style={{ cursor: 'pointer'}} , postettu <marquee> */}
+        <h1 onClick={() => setClock(!clock)} style={{ cursor: 'pointer'}}>Northwind 2021</h1>   {/*lisätty: style={{ cursor: 'pointer'}} , postettu <marquee> */}
       </header>
 
 <Router>
   <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+    <Navbar.Brand href="#home">Alkusivu tulossa</Navbar.Brand>
+
     <Nav className="mr-auto">
       <Link to={'/Customers'} className="nav-link">Customers</Link>
       <Link to={'/Logins'} className="nav-link">Logins</Link>
@@ -48,15 +49,12 @@ const [clock, setClock] = useState(false)
     <Route path='/Products' component={ProductList} />
     <Route path='/Employees' component={EmployeeList} />
   </Switch>
-</Router>
-        
+</Router>    
       
         {clock && <Kello koko={350} />}
 
-    
-
     </div>
-  );
+  )
 }
 
 export default App;
