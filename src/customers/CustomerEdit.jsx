@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
-import './App.css'
-import CustomerService from './services/customer'
+import '../App.css'
+import CustomerService from '../services/customer'
 
-const CustomerAdd = ({ setLisäystila, setCustomers, customers, setMessage, setShowMessage,
-    setIsPositive }) => {
+const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, setShowMessage,
+    setIsPositive, muokattavaCustomer }) => {
 
     // State määritykset
 
-    const [newCustomerId, setNewCustomerId] = useState('')
-    const [newCompanyName, setNewCompanyName] = useState('')
-    const [newContactName, setNewContactName] = useState('')
-    const [newContactTitle, setNewContactTitle] = useState('')
+    const [newCustomerId, setNewCustomerId] = useState(muokattavaCustomer.customerId)
+    const [newCompanyName, setNewCompanyName] = useState(muokattavaCustomer.companyName)
+    const [newContactName, setNewContactName] = useState(muokattavaCustomer.contactName)
+    const [newContactTitle, setNewContactTitle] = useState(muokattavaCustomer.contactTitle)
 
-    const [newCountry, setNewCountry] = useState('')
-    const [newAddress, setNewAddress] = useState('')
-    const [newCity, setNewCity] = useState('')
+    const [newCountry, setNewCountry] = useState(muokattavaCustomer.country)
+    const [newAddress, setNewAddress] = useState(muokattavaCustomer.address)
+    const [newCity, setNewCity] = useState(muokattavaCustomer.city)
 
-    const [newPostalCode, setNewPostalCode] = useState('')
-    const [newPhone, setNewPhone] = useState('')
-    const [newFax, setNewFax] = useState('')
+    const [newPostalCode, setNewPostalCode] = useState(muokattavaCustomer.postalCode)
+    const [newPhone, setNewPhone] = useState(muokattavaCustomer.phone)
+    const [newFax, setNewFax] = useState(muokattavaCustomer.fax)
 
-    // Lomakkeen onSubmit tapahtumankäsittelijä
+    // Muokkauslomakkeen onSubmit tapahtumankäsittelijä
 
     const submitCustomer = (event) => {
         event.preventDefault()
-        var newCustomer = {
+        var changedCustomer = {
             customerId: newCustomerId.toUpperCase(),
             companyName: newCompanyName,
             contactName: newContactName,
@@ -38,12 +38,20 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers, setMessage, setS
         }
 
         CustomerService
-            .create(newCustomer)
+            .update(changedCustomer) // Put pyyntö back-endille
             .then(response => {
 
                 if (response.status === 200) {
-                    setCustomers(customers.concat(newCustomer))
-                    setMessage(`Lisätty ${newCustomer.companyName}`)
+
+                    const id = changedCustomer.customerId
+
+                    // Poistetaan ensin vanha customer statesta
+                    setCustomers(customers.filter(filtered => filtered.customerId !== id))
+
+                    // Ja lisätään uudestaan muuttuneilla tiedoilla
+                    setCustomers(customers.concat(changedCustomer))
+
+                    setMessage(`Päivitetty ${changedCustomer.companyName}`)
                     setIsPositive(true)
                     setShowMessage(true)
 
@@ -65,10 +73,10 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers, setMessage, setS
                 )
             })
 
-            setTimeout(() =>{
-                setLisäystila(false)
-            }, 500
-            )
+    setTimeout(() => {
+      setMuokkaustila(false)
+    }, 800
+    )
         
 
     }
@@ -81,8 +89,8 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers, setMessage, setS
             {/* inputien tapahtumankäsittelijöissä on määritelty funktio, jotka saa parametrikseen kyseisen
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
             <div>
-                <input type="text" value={newCustomerId} placeholder="ID with 5 capital letters" maxLength="5" minLength="5"
-                    onChange={({ target }) => setNewCustomerId(target.value)} required />
+                <p style={{ color: 'white' }}>ID field cannot be edited</p>
+                <input type="text" value={newCustomerId} />
             </div>
             <div>
                 <input type="text" value={newCompanyName} placeholder="Company name"
@@ -121,12 +129,13 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers, setMessage, setS
                     onChange={({ target }) => setNewFax(target.value)} />
             </div>
 
-            <button type="submit">Create</button>    {/* poistettu: style={{ background: 'green' }} hakee värin App.css*/}
+            <button className="nappi" type="submit" >Save</button>  
+            {/* poistettu: style={{ background: 'green' }} */}
 
-            <button onClick={() => setLisäystila(false)} style={{ background: 'red' }}>
+            <button className="nappi" onClick={() => setMuokkaustila(false)} style={{ background: 'red' }}>
                 Cancel</button>
         </form>
     )
 }
 
-export default CustomerAdd
+export default CustomerEdit

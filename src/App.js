@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import './App.css';
-/*import Laskuri from './laskuri'*/
-import CustomerList from './CustomerList'
+import CustomerList from './customers/CustomerList'
 import Kello from './Kello'
+/*import Laskuri from './laskuri'*/
 // import Message from './Message'
-import LoginList from './LoginList'
-import ProductList from './ProductList'
-import EmployeeList from './EmployeeList'
+import LoginList from './logins/LoginList'
+import ProductList from './products/ProductList'
+import EmployeeList from './employees/EmployeeList'
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
