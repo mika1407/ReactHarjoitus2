@@ -37,7 +37,7 @@ const LoginList = () => {
     <input placeholder="Search by Firstname" value={search} onChange={handleSeachInputChange}/>
 
     {logins && näytetäänkö === true && lisäysTila === false && logins.map(login =>{
-      const caseInsensName = login.Firstname.toLowerCase()
+      const caseInsensName = login.firstname.toLowerCase()
         if (caseInsensName.indexOf(search) > -1) {
           return (
             <Login key={login.loginId} login={login} />

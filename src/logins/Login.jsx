@@ -10,30 +10,30 @@ return (
       <h3 onMouseOver={() => setNäytäEnemmän(!näytäEnemmän)}
           onMouseLeave={() => setNäytäEnemmän(!näytäEnemmän)}
       >
-        {login.Firstname} <button>Delete</button><button>Edit</button>
+        {login.firstname} <button>Delete</button><button>Edit</button>  {/* firstname pienellä */}
       </h3>
 
-      {/* {näytäEnemmän && <div className="customerWindow">
+      {näytäEnemmän && <div className="customerWindow">
       <table>
         <thead>
           <tr>
-            <th>Contact person: </th>
-            <th>Phone:</th>
-            <th>Address:</th>
-            <th>City: </th>
-            <th>Country: </th>
+            <th>Username: </th>
+            <th>Firstname:</th>
+            <th>Lastname:</th>
+            <th>Email: </th>
+            <th>AccessLevelId: </th>
           </tr>
         </thead>
         <tbody>
         <tr>
-          <td>{customer.contactName}{' | '}</td>
-          <td>{customer.phone}</td>
-          <td>{customer.address}</td>
-          <td>{customer.city}{' | '}</td>
-          <td>{customer.country}</td>
+          <td>{login.username}{' '}</td>
+          <td>{login.firstname}</td>
+          <td>{login.lastname}</td>
+          <td>{login.email}{' '}</td>
+          <td>{login.accesslevelId}</td>
         </tr>
         </tbody>
-      </table></div>} */}
+      </table></div>}
     </>
   );
 }
