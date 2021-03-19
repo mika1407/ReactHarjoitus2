@@ -1,16 +1,20 @@
 import '../App.css';
 import React, {useState} from 'react'
 
-const Login = ({login}) => {
+const Login = ({login, handleDeleteClick, handleEditClick}) => {
 
 const [näytäEnemmän, setNäytäEnemmän] = useState(false)
 
 return (
     <>
-      <h3 onMouseOver={() => setNäytäEnemmän(!näytäEnemmän)}
+      <h3><nobr onMouseOver={() => setNäytäEnemmän(!näytäEnemmän)}
           onMouseLeave={() => setNäytäEnemmän(!näytäEnemmän)}
       >
-        {login.firstname} <button>Delete</button><button>Edit</button>  {/* firstname pienellä */}
+        {login.firstname}       {/* firstname pienellä */}
+        </nobr>
+        <button className="nappi" onClick={() => handleDeleteClick(login.loginId)} >Delete</button>
+
+        <button className="nappi" onClick={() => handleEditClick(login)} >Edit</button>
       </h3>
 
       {näytäEnemmän && <div className="customerWindow">

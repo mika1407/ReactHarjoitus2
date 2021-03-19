@@ -14,7 +14,7 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
 
     const [newLastname, setNewLastname] = useState(muokattavaLogin.lastname)
     const [newEmail, setNewEmail] = useState(muokattavaLogin.email)
-    const [newAccesslevelID, setNewAccesslevelID] = useState(muokattavaLogin.accesslevelid)
+    const [newAccesslevelID, setNewAccesslevelID] = useState(muokattavaLogin.accesslevelId)
     
 
     // Muokkauslomakkeen onSubmit tapahtumankäsittelijä
@@ -28,7 +28,7 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
             firstname: newFirstname,
             lastname: newLastname,
             email: newEmail,
-            accesslevelid: newAccesslevelID 
+            accesslevelId: newAccesslevelID 
         }
 
         LoginService
