@@ -3,7 +3,7 @@ import '../App.css'
 import LoginService from '../services/logins'
 import LoginAdd from './LoginAdd'
 import Login from './Login'
-import LoginEdit from './LoginEdit'     //tekeillä, backend puuttuu
+import LoginEdit from './LoginEdit'     
 import Message from '../Message'
 
 const LoginList = () => {
@@ -21,10 +21,10 @@ const LoginList = () => {
 
   useEffect(() => {
     LoginService
-    .getAll()
-    .then(data => {
-      //console.log(data)
-      setLogins(data)     
+      .getAll()
+      .then(data => {
+        //console.log(data)
+        setLogins(data)     
     })
   }, [lisäysTila, näytetäänkö, muokkausTila])
 
@@ -37,10 +37,10 @@ const LoginList = () => {
    const handleDeleteClick = id => {
 
         //Kaivetaan esiin koko login olio jotta alertissa voidaan näyttää firstname id:n sijaan
-        const login = logins.find(cust => cust.loginId === id)
+        const login = logins.find(login => login.loginId === id)
 
         // Poiston varmistus kyselyikkuna
-        const confirm = window.confirm(`Haluatko todella poistaa: ${login.firstname}:n pysyvästi?`)
+        const confirm = window.confirm(`Haluatko todella poistaa: ${login.username}:n pysyvästi?`)
 
         if (confirm) {
 
@@ -51,7 +51,7 @@ const LoginList = () => {
                         // Poistetaan login statesta
                         setLogins(logins.filter(filtered => filtered.loginId !== id))
 
-                        setMessage(`${login.firstname}:n poisto onnistui!`)
+                        setMessage(`${login.username}:n poisto onnistui!`)
                         setIsPositive(true)
                         setShowMessage(true)
                         window.scrollBy(0, -10000) // Scrollataan ylös jotta nähdään alert :)

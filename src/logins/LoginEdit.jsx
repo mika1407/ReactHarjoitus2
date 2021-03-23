@@ -7,14 +7,14 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
 
     // State määritykset
 
-    const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
+    // const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
     const [newUsername, setNewUsername] = useState(muokattavaLogin.username)
     const [newPassword, setNewPassword] = useState(muokattavaLogin.password)
     const [newFirstname, setNewFirstname] = useState(muokattavaLogin.firstname)
 
     const [newLastname, setNewLastname] = useState(muokattavaLogin.lastname)
     const [newEmail, setNewEmail] = useState(muokattavaLogin.email)
-    const [newAccesslevelID, setNewAccesslevelID] = useState(muokattavaLogin.accesslevelId)
+    const [newAccesslevelId, setNewAccesslevelId] = useState(muokattavaLogin.accesslevelId)
     
 
     // Muokkauslomakkeen onSubmit tapahtumankäsittelijä
@@ -22,13 +22,13 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
     const submitLogin = (event) => {
         event.preventDefault()
         var changedLogin = {
-            loginId: newLoginId.toUpperCase(),
+            // loginId: newLoginId.toUpperCase(),
             username: newUsername,
             password: newPassword,
             firstname: newFirstname,
             lastname: newLastname,
             email: newEmail,
-            accesslevelId: newAccesslevelID 
+            accesslevelId: newAccesslevelId 
         }
 
         LoginService
@@ -84,7 +84,7 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
             <div>
                 <p style={{ color: 'white' }}>ID field cannot be edited</p>
-                <input type="text" value={newLoginId} />
+                {/* <input type="text" value={newLoginId} /> */}
             </div>
             <div>
                 <input type="text" value={newUsername} placeholder="Username"
@@ -107,8 +107,8 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
                     onChange={({ target }) => setNewEmail(target.value)} />
             </div>
             <div>
-                <input type="text" value={newAccesslevelID} placeholder="AccesslevelID"
-                    onChange={({ target }) => setNewAccesslevelID(target.value)} />
+                <input type="text" value={newAccesslevelId} placeholder="AccesslevelID"
+                    onChange={({ target }) => setNewAccesslevelId(target.value)} />
             </div>
 
             <button className="nappi" type="submit" >Save</button>  

@@ -13,8 +13,8 @@ const create = newLogin => {
 
 const remove = id => axios.delete(`${baseUrl}/${id}`)
 
-const update = changedLogin => {
-    return axios.put(`${baseUrl}/${changedLogin.loginId}`, changedLogin)
+const update = (id, changedLogin) => {
+    return axios.put(`${baseUrl}/${id}`, changedLogin)
 }
 
 
