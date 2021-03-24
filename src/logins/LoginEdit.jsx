@@ -7,7 +7,7 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
 
     // State määritykset
 
-    // const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
+    const [newLoginId, setNewLoginId] = useState(muokattavaLogin.loginId)
     const [newUsername, setNewUsername] = useState(muokattavaLogin.username)
     const [newPassword, setNewPassword] = useState(muokattavaLogin.password)
     const [newFirstname, setNewFirstname] = useState(muokattavaLogin.firstname)
@@ -21,8 +21,9 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
 
     const submitLogin = (event) => {
         event.preventDefault()
+
         var changedLogin = {
-            // loginId: newLoginId.toUpperCase(),
+            loginId: newLoginId,
             username: newUsername,
             password: newPassword,
             firstname: newFirstname,
@@ -84,15 +85,11 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
             <div>
                 <p style={{ color: 'white' }}>ID field cannot be edited</p>
-                {/* <input type="text" value={newLoginId} /> */}
+                {<input type="text" value={newLoginId} /> }
             </div>
             <div>
                 <input type="text" value={newUsername} placeholder="Username"
-                    onChange={({ target }) => setNewUsername(target.value)} required />
-            </div>
-            <div>
-                <input type="text" value={newPassword} placeholder="Password"
-                    onChange={({ target }) => setNewPassword(target.value)} />
+                    onChange={({ target }) => setNewUsername(target.value)} required/>
             </div>
             <div>
                 <input type="text" value={newFirstname} placeholder="Firstname"
@@ -103,11 +100,19 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
                     onChange={({ target }) => setNewLastname(target.value)} />
             </div>
             <div>
-                <input type="text" value={newEmail} placeholder="Email"
+                <input type="email" value={newEmail} placeholder="Email"
                     onChange={({ target }) => setNewEmail(target.value)} />
             </div>
             <div>
-                <input type="text" value={newAccesslevelId} placeholder="AccesslevelID"
+                <input type="password" value={newPassword} placeholder="Password"   //type password
+                    onChange={({ target }) => setNewPassword(target.value)} />
+            </div>
+            {/* <div>
+                <input type="password" value={passwordAgain} placeholder="Re-enter password"
+                    onChange={({ target }) => setPasswordAgain(target.value)} required />
+            </div> */}
+            <div>
+                <input type="number" value={newAccesslevelId} placeholder="AccesslevelID"
                     onChange={({ target }) => setNewAccesslevelId(target.value)} />
             </div>
 

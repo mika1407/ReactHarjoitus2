@@ -65,6 +65,14 @@ td {
   margin-top: 10px;
 }
 
+.kello2 { 
+  margin-top: 10px;
+  margin-right: 10%;
+}
+.p2{
+  text-align: center;
+}
+
 form {
   margin-left: 20%;
   border-style: solid;

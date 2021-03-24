@@ -9,7 +9,7 @@ import Message from '../Message'
 const LoginList = () => {
 
   const [logins, setLogins] = useState([])
-  const [näytetäänkö, setNäytetäänkö] = useState(false)
+  const [näytetäänkö, setNäytetäänkö] = useState(true) // muutin false true, näyttää henkilöt heti
   const [search, setSearch] = useState("")
   const [lisäysTila, setLisäystila] = useState(false)
   const [muokkausTila, setMuokkaustila] = useState(false)

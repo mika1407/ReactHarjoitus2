@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import './App.css';
 import CustomerList from './customers/CustomerList'
 import Kello from './Kello'
+import Kello2 from './Kello2'
 /*import Laskuri from './laskuri'*/
 // import Message from './Message'
 import LoginList from './logins/LoginList'
@@ -32,7 +33,7 @@ const [clock, setClock] = useState(false)
       </header>
 
 <Router>
-  <Navbar bg="dark" variant="dark">
+  <Navbar bg="primary" variant="dark">     {/*väri vaihdettu https://react-bootstrap.github.io/components/navbar/*/}
     <Navbar.Brand href="#home">Alkusivu tulossa</Navbar.Brand>
 
     <Nav className="mr-auto">
@@ -40,6 +41,7 @@ const [clock, setClock] = useState(false)
       <Link to={'/Logins'} className="nav-link">Logins</Link>
       <Link to={'/Products'} className="nav-link">Products</Link>
       <Link to={'/Employees'} className="nav-link">Employees</Link>
+      <Link to={'/Kello2'} className="nav-link">Kello</Link>
     </Nav>
   </Navbar>
   
@@ -48,6 +50,7 @@ const [clock, setClock] = useState(false)
     <Route path='/Logins' component={LoginList} />
     <Route path='/Products' component={ProductList} />
     <Route path='/Employees' component={EmployeeList} />
+    <Route path='/Kello2'  component={Kello2 } />
   </Switch>
 </Router>    
       
