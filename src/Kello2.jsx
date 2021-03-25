@@ -9,11 +9,12 @@ import './App.css'
 
   return (
     <div className="kello2">
-      {<Kello koko={450}/>}
-    
-      <div style={{display: 'flex', justifyContent: 'left', marginLeft: 20}}>
-         <div>Otsikkoa Northwind 2021 painamalla aukeaa toinen kello!</div>
+      <div style={{display: 'flex', justifyContent: 'left', marginLeft: 30}}>
+         <div>Tämä sivu näyttää vain kellon</div>
       </div>
+
+      {<Kello koko={400}/>}
+    
       
     </div>
   )
