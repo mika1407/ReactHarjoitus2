@@ -37,6 +37,10 @@ const CustomerEdit = ({ setMuokkaustila, setCustomers, customers, setMessage, se
             fax: newFax
         }
 
+        // Lähetetään servicelle token ennen kuin tehdään update pyyntö serviceen
+        const jwt = localStorage.getItem('token')
+        CustomerService.setToken(jwt)
+
         CustomerService
             .update(changedCustomer) // Put pyyntö back-endille
             .then(response => {

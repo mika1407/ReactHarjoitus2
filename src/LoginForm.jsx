@@ -3,46 +3,84 @@ import "./App.css";
 import AuthService from "./services/auth";
 import md5 from "md5";
 
-const LoginForm = ({ currentUser, setCurrentUser }) => {
+const LoginForm = ({ currentUser, setCurrentUser, setMessage,
+    setIsPositive, setShowMessage  }) => {
 
   // Login lomakkeen kenttiä vastaavat statet
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // Näytetäänkö pelkkä komponentti vai nappi jonka takana komponentti aukeaa
-  const [näytetäänkö, setNäytetäänkö] = useState(false);
-
   // Login napin painallus ajaa tämän:
-
   const authenticate = (event) => {
     event.preventDefault();
 
     const userForAuth = {
       username: username,
+      //password: md5(password) vaihda kommentit ao. kanssa jos kannassa hashatty salasana
       password: password
     };
 
     console.log(userForAuth);
 
-    AuthService
+    AuthService   // Käytetään AuthServicen metodia authenticate()
       .authenticate(userForAuth)
       .then(response => {
 
+           //Palvelimen vastauksena tullut käyttäjä talletetaan selaimen local storageen //Päätetään tallettaa vain 2 tietoa:       
           localStorage.setItem("user", response.username);
           localStorage.setItem("token", response.token);
           
-          // Asetetaan käyttäjä stateen
+          // Asetetaan käyttäjänimi currentUser -stateen, jota säilytetään App.js:ssä
           setCurrentUser(response.username);
-          setNäytetäänkö(true)
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
 
+                // Annetaan ilmoitus käyttäen Message komponenttia, joka sijaitsee nyt tämän
+                // viestin näyttämiseksi App.js komponentissa navbarin alapuolella.
+                // Login form on niin pieni ja nurkassa että tämän sisällä ei voi näyttää messagea.
+
+                setMessage(`Tervetuloa ${response.username}`)
+                setIsPositive(true)
+                setShowMessage(true)
+
+                // Message pois pienen viiveen jälkeen:
+                setTimeout(() => {
+                    setShowMessage(false)
+                }, 4000
+
+                )
+         
+      })
+
+      .catch(error => {
+          setMessage(`Error ${error}`)
+          setIsPositive(false)  // Erroreille punainen viesti
+          setShowMessage(true)
+
+          // Message pois pienen viiveen jälkeen:
+          setTimeout(() => {
+              setShowMessage(false)
+          }, 4000
+
+          )
+      })
+    }
+
+    // Tämä funktio ajetaan kun tehdään Logout
       const logout = () => {
         localStorage.clear()
-        window.location.reload()
+        setCurrentUser(null)
+
+        // Message
+        setMessage('Kirjauduit ulos onnistuneesti')
+        setIsPositive(true)
+        setShowMessage(true)
+
+        // Message pois pienen viiveen jälkeen:
+        setTimeout(() => {
+            setShowMessage(false)
+        }, 4000
+
+        )
+
     }
 
   // Empty napin painallus ajaa tämän
@@ -51,33 +89,30 @@ const LoginForm = ({ currentUser, setCurrentUser }) => {
     setUsername("");
   };
 
-  if (!currentUser && näytetäänkö) {
+  // Jos App.js:n useEffect funktio ei löydä local storagesta käyttäjää, tilanne on tämä:
+  if (!currentUser) {
     return (
       <>
         <form className="login-form" onSubmit={authenticate}>
-          <input className="login-input" value={username} type="text" placeholder="Username" onChange={({ target }) => setUsername(target.value)}
-          />
+          <input className="login-input" value={username} type="text" placeholder="Username" onChange={({ target }) => setUsername(target.value)} />
 
-          <input className="login-input" value={password} type="password" placeholder="password" onChange={({ target }) => setPassword(target.value)}
-          />
+          <input className="login-input" value={password} type="password" placeholder="password" onChange={({ target }) => setPassword(target.value)} />
 
           <button type="submit" className="login-button">Login</button>
 
-          <button className="cancel-button" onClick={emptyFields}>Empty</button>
-
-           <button className="cancel-button" onClick={() => setNäytetäänkö(false)}>Hide</button>
+          <p className="cancel-button" onClick={emptyFields}>Empty</p>
         </form>
       </>
     );
-  } else if (currentUser && näytetäänkö) {
+  } 
+  // Muussa tapauksessa:
+  else if (currentUser) {
     return (
-      <div>
-        <p>`Logged in as ${currentUser.username}`</p>
+      <div className="käyttäjä-tieto">
+        <nobr>{`Logged in as ${currentUser}`}</nobr>
         <button className="cancel-button" onClick={logout}>Logout</button>
       </div>
     );
-  } else {
-    return <button onClick={() => setNäytetäänkö(true)}>Login</button>;
   }
 };
 

@@ -11,6 +11,8 @@ import LoginForm from "./LoginForm";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Message from './Message'
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const App = () => {
@@ -19,7 +21,12 @@ const App = () => {
   // State kirjautuneesta käyttäjästä
   const [currentUser, setCurrentUser] = useState();
 
-  // use effectissä tarkistetaan onko selaimen local storagessa user tietoa
+  // Statet Login aiheisesta Messagen näyttämisestä
+  const [showMessage, setShowMessage] = useState(false)
+  const [isPositive, setIsPositive] = useState(true)
+  const [message, setMessage] = useState('')
+
+  // use effectissä tarkistetaan onko selaimen local storagessa user tietoa vanhastaan
   useEffect(() => {
     const userFromLS = localStorage.getItem("user");
     if (userFromLS) {
@@ -45,12 +52,13 @@ const App = () => {
               <Link to={"/Employees"} className="nav-link">Employees</Link>
               <Link to={"/Kello2"} className="nav-link">Kello</Link>
 
-              <LoginForm
-                currentUser={currentUser}
-                setCurrentUser={setCurrentUser}
-              />
+              <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} setMessage={setMessage} isPositive={isPositive} setShowMessage={setShowMessage} />
             </Nav>
           </Navbar>
+
+          {showMessage &&
+            <Message message={message} isPositive={isPositive} />
+          }
 
           <Switch>
             <Route path="/Customers" component={CustomerList} />
@@ -78,14 +86,20 @@ const App = () => {
           <Navbar bg="dark" variant="dark">
             <Link to={"/"} className="nav-link">Home</Link>
 
-            <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser}
+              setMessage={setMessage} setIsPositive={setIsPositive}
+              setShowMessage={setShowMessage} />
           </Navbar>
+
+          {showMessage &&
+            <Message message={message} isPositive={isPositive} />
+          }
 
           <Switch>
             <Route path="/" component={Homepage} />
           </Switch>
-        </Router>
 
+        </Router>
       </div>
     );
   }

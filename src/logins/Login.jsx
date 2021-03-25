@@ -25,7 +25,6 @@ return (
             <th>Firstname:</th>
             <th>Lastname:</th>
             <th>Email: </th>
-            <th>AccessLevelId: </th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +33,6 @@ return (
           <td>{login.firstname}</td>
           <td>{login.lastname}</td>
           <td>{login.email}{' '}</td>
-          <td>{login.accesslevelId}</td>
         </tr>
         </tbody>
       </table></div>}

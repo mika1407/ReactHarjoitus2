@@ -39,7 +39,8 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers,setMessage,setSho
     const jwt = localStorage.getItem("token");
     CustomerService.setToken(jwt);
 
-    CustomerService.create(newCustomer)
+    CustomerService
+      .create(newCustomer)
       .then((response) => {
         if (response.status === 200) {
           setCustomers(customers.concat(newCustomer));
@@ -74,97 +75,39 @@ const CustomerAdd = ({ setLisäystila, setCustomers, customers,setMessage,setSho
       {/* inputien tapahtumankäsittelijöissä on määritelty funktio, jotka saa parametrikseen kyseisen
             input elementin target tiedon. Funktiot kutsuvat set state hookia parametrina target.value */}
       <div>
-        <input
-          type="text"
-          value={newCustomerId}
-          placeholder="ID with 5 capital letters"
-          maxLength="5"
-          minLength="5"
-          onChange={({ target }) => setNewCustomerId(target.value)}
-          required
-        />
+        <input type="text" value={newCustomerId} placeholder="ID with 5 capital letters" maxLength="5" minLength="5" onChange={({ target }) => setNewCustomerId(target.value)} required />
       </div>
       <div>
-        <input
-          type="text"
-          value={newCompanyName}
-          placeholder="Company name"
-          onChange={({ target }) => setNewCompanyName(target.value)}
-          required
-        />
+        <input type="text" value={newCompanyName} placeholder="Company name" onChange={({ target }) => setNewCompanyName(target.value)} required />
       </div>
       <div>
-        <input
-          type="text"
-          value={newContactName}
-          placeholder="Contact name"
-          onChange={({ target }) => setNewContactName(target.value)}
-        />
+        <input type="text" value={newContactName} placeholder="Contact name" onChange={({ target }) => setNewContactName(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newContactTitle}
-          placeholder="Contact title"
-          onChange={({ target }) => setNewContactTitle(target.value)}
-        />
+        <input type="text" value={newContactTitle} placeholder="Contact title" onChange={({ target }) => setNewContactTitle(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newCountry}
-          placeholder="Country"
-          onChange={({ target }) => setNewCountry(target.value)}
-        />
+        <input type="text" value={newCountry} placeholder="Country" onChange={({ target }) => setNewCountry(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newAddress}
-          placeholder="Address"
-          onChange={({ target }) => setNewAddress(target.value)}
-        />
+        <input type="text" value={newAddress} placeholder="Address" onChange={({ target }) => setNewAddress(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newCity}
-          placeholder="City"
-          onChange={({ target }) => setNewCity(target.value)}
-        />
+        <input type="text" value={newCity} placeholder="City" onChange={({ target }) => setNewCity(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newPostalCode}
-          placeholder="Postal code"
-          onChange={({ target }) => setNewPostalCode(target.value)}
-        />
+        <input type="text" value={newPostalCode} placeholder="Postal code" onChange={({ target }) => setNewPostalCode(target.value)} />
       </div>
       <div>
-        <input
-          type="text"
-          value={newPhone}
-          placeholder="Phone"
-          onChange={({ target }) => setNewPhone(target.value)}
-        />
+        <input type="text" value={newPhone} placeholder="Phone" onChange={({ target }) => setNewPhone(target.value)}  />
       </div>
       <div>
-        <input
-          type="text"
-          value={newFax}
-          placeholder="Fax"
-          onChange={({ target }) => setNewFax(target.value)}
-        />
+        <input type="text" value={newFax} placeholder="Fax" onChange={({ target }) => setNewFax(target.value)} />
       </div>
-      <button type="submit">Create</button>{" "}
-      {/* poistettu: style={{ background: 'green' }} hakee värin App.css*/}
-      <button
-        onClick={() => setLisäystila(false)}
-        style={{ background: "red" }}
-      >
-        Cancel
-      </button>
+
+      <button className="nappi" type="submit">Create</button>
+      
+      <button className="nappi" onClick={() => setLisäystila(false)} style={{ background: "red" }}>Cancel</button>
     </form>
   );
 };

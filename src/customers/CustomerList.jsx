@@ -12,6 +12,7 @@ const CustomerList = () => {
     const [näytetäänkö, setNäytetäänkö] = useState(false)
     const [search, setSearch] = useState("")
     const [lisäysTila, setLisäystila] = useState(false)
+
     const [muokkausTila, setMuokkaustila] = useState(false)
     const [muokattavaCustomer, setMuokattavaCustomer] = useState({}) // yksi customer olio
 
@@ -19,11 +20,15 @@ const CustomerList = () => {
     const [isPositive, setIsPositive] = useState(false)
     const [message, setMessage] = useState('')
 
+    // use effectiin lisätty tokenin haku localstoragesta 25.3.
+
     useEffect(() => {
+        const token = localStorage.getItem('token')
+        CustomerService
+            .setToken(token)
         CustomerService
             .getAll()
             .then(data => {
-                console.log(data)
                 setCustomers(data)
             })
     }, [lisäysTila, näytetäänkö, muokkausTila])
@@ -35,7 +40,7 @@ const CustomerList = () => {
     }
 
 
-    // Poisto on nyt korjattu (14.3.2021)
+     // Poistoonkin lisätty token lähetys 25.3.
 
     const handleDeleteClick = id => {
 
@@ -47,7 +52,10 @@ const CustomerList = () => {
 
         if (confirm) {
 
-            CustomerService.remove(id)
+            const jwt = localStorage.getItem('token') // Token local storagesta
+            CustomerService.setToken(jwt) // Token servicelle tiedoksi
+
+            CustomerService.remove(id)      // sitten pyyntö perään
                 .then(response => {
 
                     if (response.status === 200) {

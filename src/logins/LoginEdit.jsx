@@ -29,7 +29,7 @@ const LoginEdit = ({ setMuokkaustila, setLogins, logins, setMessage, setShowMess
             firstname: newFirstname,
             lastname: newLastname,
             email: newEmail,
-            accesslevelId: newAccesslevelId 
+            accesslevelId: parseInt(newAccesslevelId)  // lisäsin parseInt !!
         }
 
         LoginService
