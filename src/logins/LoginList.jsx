@@ -113,7 +113,7 @@ const LoginList = () => {
         <Message message={message} isPositive={isPositive}/>
     }
 
-    {logins && näytetäänkö === true && lisäysTila === false && logins.map(login =>{
+    {logins && näytetäänkö && !lisäysTila && !muokkausTila  && logins.map(login =>{
       const caseInsensName = login.firstname.toLowerCase()
         if (caseInsensName.indexOf(search) > -1) {
           return (

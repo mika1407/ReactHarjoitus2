@@ -41,4 +41,5 @@ const update = changedProduct => {
 }
 
 
+
 export default { getAll, create, remove, update, setToken }

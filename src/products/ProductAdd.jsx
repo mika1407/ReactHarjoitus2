@@ -78,28 +78,28 @@ const ProductAdd = ({ setLisäystila, setProducts, products,setMessage,setShowMe
         <input type="text" value={newProductName} placeholder="Productname" onChange={({ target }) => setNewProductName(target.value)} required />
       </div>
       <div>
-        <input type="text" value={newSupplierId} placeholder="SupplierId" onChange={({ target }) => setNewSupplierId(target.value)} />
+        <input type="number" value={newSupplierId} placeholder="SupplierId" onChange={({ target }) => setNewSupplierId(target.value)} />
       </div>
       <div>
-        <input type="text" value={newCategoryId} placeholder="CategoryId" onChange={({ target }) => setNewCategoryId(target.value)} />
+        <input type="number" value={newCategoryId} placeholder="CategoryId" onChange={({ target }) => setNewCategoryId(target.value)} />
       </div>
       <div>
         <input type="text" value={newQuantityPerUnit} placeholder="QuantityPerUnit" onChange={({ target }) => setNewQuantityPerUnit(target.value)} />
       </div>
       <div>
-        <input type="text" value={newUnitPrice} placeholder="UnitPrice" onChange={({ target }) => setNewUnitPrice(target.value)} />
+        <input type="number" value={newUnitPrice} placeholder="UnitPrice" onChange={({ target }) => setNewUnitPrice(target.value)} />
       </div>
       <div>
-        <input type="text" value={newUnitsInStock} placeholder="Units In Stock" onChange={({ target }) => setNewUnitsInStock(target.value)} />
+        <input type="number" value={newUnitsInStock} placeholder="Units In Stock" onChange={({ target }) => setNewUnitsInStock(target.value)} />
       </div>
       <div>
-        <input type="text" value={newUnitsOnOrder} placeholder="Units On Order" onChange={({ target }) => setNewUnitsOnOrder(target.value)} />
+        <input type="number" value={newUnitsOnOrder} placeholder="Units On Order" onChange={({ target }) => setNewUnitsOnOrder(target.value)} />
       </div>
       <div>
-        <input type="text" value={newReorderLevel} placeholder="Reorderlevel" onChange={({ target }) => setNewReorderLevel(target.value)} />
+        <input type="number" value={newReorderLevel} placeholder="Reorderlevel" onChange={({ target }) => setNewReorderLevel(target.value)} />
       </div>
       <div>
-        <input type="text" value={newDiscontinued} placeholder="Discontinued" onChange={({ target }) => setNewDiscontinued(target.value )} required />
+        <input type="checkbox" value={newDiscontinued} placeholder="Discontinued" onChange={({ target }) => setNewDiscontinued(target.value )} required />
       </div>
     
 

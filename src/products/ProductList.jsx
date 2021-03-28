@@ -116,7 +116,7 @@ const ProductList = () => {
         <Message message={message} isPositive={isPositive}/>
     }
 
-    {products && näytetäänkö === true && lisäysTila === false && products.map(product =>{
+    {products && näytetäänkö && !lisäysTila && !muokkausTila && products.map(product =>{
       const lowerCaseName = product.productName.toLowerCase()
         if (lowerCaseName.indexOf(search) > -1) {
           return (
