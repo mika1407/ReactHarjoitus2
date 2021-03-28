@@ -29,10 +29,10 @@ return (
         </thead>
         <tbody>
         <tr>
-          <td>{login.username}{' '}</td>
+          <td>{login.username}</td>
           <td>{login.firstname}</td>
           <td>{login.lastname}</td>
-          <td>{login.email}{' '}</td>
+          <td>{login.email}</td>
         </tr>
         </tbody>
       </table></div>}

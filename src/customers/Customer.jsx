@@ -39,10 +39,10 @@ return (
         </thead>
         <tbody>
         <tr>
-          <td>{customer.contactName}{' '}</td>
+          <td>{customer.contactName}</td>
           <td>{customer.phone}</td>
           <td>{customer.address}</td>
-          <td>{customer.city}{'  '}</td>
+          <td>{customer.city}</td>
           <td>{customer.country}</td>
         </tr>
         </tbody>

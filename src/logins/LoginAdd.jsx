@@ -113,12 +113,12 @@ const LoginAdd = ({ setLisäystila, setLogins, logins, setMessage, setShowMessag
             </div>
             <div>
                 <input type="email" value={newEmail} placeholder="Email"
-                    onChange={({ target }) => setNewEmail(target.value)} />
+                    onChange={({ target }) => setNewEmail(target.value)} required />
             </div>
             <div>
                 <p>Access level ID</p>
                 <input type="number" value={newAccesslevelId} placeholder="Access level ID"
-                    onChange={({ target }) => setNewAccesslevelId(target.value)} />
+                    onChange={({ target }) => setNewAccesslevelId(target.value)} required />
             </div>
 
             <button className="nappi" type="submit" style={{ background: 'green' }}>Create</button>
