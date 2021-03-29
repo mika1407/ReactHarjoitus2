@@ -23,27 +23,31 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
 
     const submitProduct = (event) => {
         event.preventDefault()
+          console.log(typeof(newDiscontinued))
+          console.log(newDiscontinued)
+        let disc = true;
+        newDiscontinued === "1" ? disc=true : disc=false
 
         var changedProduct = {
-            productId: newProductId,
             productName: newProductName,
-            supplierId: newSupplierId,
-            categoryId: newCategoryId,
+            supplierId: parseInt( newSupplierId),
+            categoryId: parseInt( newCategoryId),
             quantityPerUnit: newQuantityPerUnit,
-            unitPrice: newUnitPrice,
-            unitsInStock: newUnitsInStock,
-            unitsOnOrder: newUnitsOnOrder,
-            reorderLevel: newReorderLevel,
-            discontinued: newDiscontinued   
+            unitPrice: parseFloat(newUnitPrice),
+            unitsInStock: parseInt( newUnitsInStock),
+            unitsOnOrder: parseInt( newUnitsOnOrder),
+            reorderLevel: parseInt(newReorderLevel),
+            discontinued: disc 
            
         }
-
+          console.log(changedProduct)
+        const id = muokattavaProduct.productId
     // Lähetetään servicelle token ennen kuin tehdään update pyyntö serviceen
     const jwt = localStorage.getItem('token')
     ProductService.setToken(jwt)
 
     ProductService
-        .update(changedProduct) // Put pyyntö back-endille
+        .update(id, changedProduct) // Put pyyntö back-endille
         .then(response => {
 
             if (response.status === 200) {
@@ -115,7 +119,7 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
             </div>
             <div>
                 <input type="number" value={newUnitPrice} placeholder="UnitPrice"
-                    onChange={({ target }) => setNewUnitPrice(target.value)} />
+                    onChange={({ target }) => setNewUnitPrice(target.value)} step=".01"/>
             </div>
             <div>
                 <input type="number" value={newUnitsInStock} placeholder="UnitsInStock"
@@ -130,8 +134,8 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
                     onChange={({ target }) => setNewReorderLevel(target.value)} />
             </div>
             <div>
-                <input type="checkbox" value={newDiscontinued} placeholder="Discontinued"    
-                    onChange={({ target }) => setNewDiscontinued(target.value)} required/>   
+                <input type="number" min="0" max="1" value={newDiscontinued} placeholder="Discontinued, anna 0 tai 1"    
+                    onChange={({ target }) => setNewDiscontinued(target.value)} />   
             </div>
 
             <button className="nappi" type="submit" >Save</button>  

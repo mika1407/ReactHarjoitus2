@@ -22,16 +22,19 @@ const ProductAdd = ({ setLisäystila, setProducts, products,setMessage,setShowMe
   const submitProduct = (event) => {
     event.preventDefault();
 
+        let disc = true;
+        newDiscontinued === "1" ? disc=true : disc=false
+
     var newProduct = {
       productName: newProductName,
-      supplierId: newSupplierId,
-      categoryId: newCategoryId,
+      supplierId: parseInt( newSupplierId),
+      categoryId: parseInt( newCategoryId),
       quantityPerUnit: newQuantityPerUnit,
-      unitPrice: newUnitPrice,
-      unitsInStock: newUnitsInStock,
-      unitsOnOrder: newUnitsOnOrder,
-      reorderLevel: newReorderLevel,
-      discontinued: newDiscontinued    
+      unitPrice: parseFloat(newUnitPrice),
+      unitsInStock: parseInt( newUnitsInStock),
+      unitsOnOrder: parseInt( newUnitsOnOrder),
+      reorderLevel: parseInt(newReorderLevel),
+      discontinued: disc   
     };
 
     const jwt = localStorage.getItem("token");
@@ -99,7 +102,7 @@ const ProductAdd = ({ setLisäystila, setProducts, products,setMessage,setShowMe
         <input type="number" value={newReorderLevel} placeholder="Reorderlevel" onChange={({ target }) => setNewReorderLevel(target.value)} />
       </div>
       <div>
-        <input type="checkbox" value={newDiscontinued} placeholder="Discontinued" onChange={({ target }) => setNewDiscontinued(target.value )} required />
+        <input type="number" min="0" max="1" value={newDiscontinued} placeholder="Discontinued" onChange={({ target }) => setNewDiscontinued(target.value )} required />
       </div>
     
 
