@@ -23,8 +23,9 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
 
     const submitProduct = (event) => {
         event.preventDefault()
-          console.log(typeof(newDiscontinued))
-          console.log(newDiscontinued)
+          //console.log(typeof(newDiscontinued))
+          //console.log(typeof(newUnitPrice))
+          //console.log(newDiscontinued)
         let disc = true;
         newDiscontinued === "1" ? disc=true : disc=false
 
@@ -40,7 +41,9 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
             discontinued: disc 
            
         }
-          console.log(changedProduct)
+
+
+          //console.log(changedProduct)
         const id = muokattavaProduct.productId
     // Lähetetään servicelle token ennen kuin tehdään update pyyntö serviceen
     const jwt = localStorage.getItem('token')
@@ -60,6 +63,7 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
                 // Ja lisätään uudestaan muuttuneilla tiedoilla
                 setProducts(products.concat(changedProduct))
 
+                //console.log(typeof(newUnitPrice))
                 setMessage(`Päivitetty ${changedProduct.productName}`)
                 setIsPositive(true)
                 setShowMessage(true)
