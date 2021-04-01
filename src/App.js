@@ -47,7 +47,7 @@ const App = () => {
             
             <Nav className="mr-auto">
               <Link to={"/Customers"} className="nav-link">Customers</Link>
-              <Link to={"/Logins"} className="nav-link">Logins</Link>
+              <Link to={"/Logins"} className="nav-link">Users</Link>
               <Link to={"/Products"} className="nav-link">Products</Link>
               <Link to={"/Employees"} className="nav-link">Employees</Link>
               <Link to={"/Kello2"} className="nav-link">Kello</Link>

@@ -101,7 +101,7 @@ const LoginList = () => {
       <>
 
     <h1><nobr style={{ cursor: 'pointer'}} 
-      onClick={() => setNäytetäänkö(!näytetäänkö)}>Logins</nobr>
+      onClick={() => setNäytetäänkö(!näytetäänkö)}>Users</nobr>
 
     <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
 

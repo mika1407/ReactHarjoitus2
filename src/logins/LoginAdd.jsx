@@ -24,7 +24,7 @@ const LoginAdd = ({ setLisäystila, setLogins, logins, setMessage, setShowMessag
 
     // Lomakkeen onSubmit tapahtumankäsittelijä
 
-    const submitCustomer = (event) => {
+    const submitLogin = (event) => {
         event.preventDefault()
 
         if (newPassword !== passwordAgain) {
@@ -55,6 +55,7 @@ const LoginAdd = ({ setLisäystila, setLogins, logins, setMessage, setShowMessag
                     setMessage(`Lisätty ${newLogin.username}`)
                     setIsPositive(true)
                     setShowMessage(true)
+                    
 
                     setTimeout(() => {
                         setShowMessage(false)
@@ -86,7 +87,7 @@ const LoginAdd = ({ setLisäystila, setLogins, logins, setMessage, setShowMessag
     // Password tyyppi salasanassa ja salasanan "again" varmennuksessa
 
     return (
-        <form onSubmit={submitCustomer}>
+        <form onSubmit={submitLogin}>
 
             {/* inputien tapahtumankäsittelijöissä on määritelty funktio, jotka saa parametrikseen kyseisen
             input elementin target tiedon. Funktiot kutsuvat set kyseinen state hookia parametrina target.value, eli se teksti mitä on kirjoitettu */}

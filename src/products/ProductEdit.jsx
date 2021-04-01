@@ -44,7 +44,7 @@ const ProductEdit = ({ setMuokkaustila, setProducts, products, setMessage, setSh
 
 
           //console.log(changedProduct)
-        const id = muokattavaProduct.productId
+    const id = muokattavaProduct.productId
     // Lähetetään servicelle token ennen kuin tehdään update pyyntö serviceen
     const jwt = localStorage.getItem('token')
     ProductService.setToken(jwt)
