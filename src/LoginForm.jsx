@@ -29,6 +29,11 @@ const LoginForm = ({ currentUser, setCurrentUser, setMessage,
            //Palvelimen vastauksena tullut käyttäjä talletetaan selaimen local storageen //Päätetään tallettaa vain 2 tietoa:       
           localStorage.setItem("user", response.username);
           localStorage.setItem("token", response.token);
+
+          
+                //////// Admin check //////////////////////////////////////////////
+                localStorage.setItem('accesslevelId', response.accesslevelId)
+                ///////////////////////////////////////////////////////////////////
           
           // Asetetaan käyttäjänimi currentUser -stateen, jota säilytetään App.js:ssä
           setCurrentUser(response.username);

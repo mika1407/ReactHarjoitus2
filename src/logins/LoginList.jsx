@@ -19,14 +19,27 @@ const LoginList = () => {
   const [isPositive, setIsPositive] = useState(false)
   const [message, setMessage] = useState('')
 
+    ////////////// ADMIN TILATIETO ////////////////////////////
+    const [admin, setAdmin] = useState(true)
+
   useEffect(() => {
+            ////ADMIN TARKISTUS LOCAL STORAGESTA JA ASETUS STATEEN/////////
+        const accesslevelId = localStorage.getItem('accesslevelId')
+        if (accesslevelId == 1) {
+            setAdmin(true)
+        }
+        else {
+            setAdmin(false)
+        }
     LoginService
       .getAll()
       .then(data => {
         //console.log(data)
         setLogins(data)     
     })
-  }, [lisäysTila, näytetäänkö, muokkausTila])
+  }, [lisäysTila])
+
+  //[lisäysTila, näytetäänkö, muokkausTila]) vanha koodi
 
   //Hakukentän onChange tapahtumankäsittelijä
   const handleSeachInputChange = (event) => {
@@ -94,18 +107,37 @@ const LoginList = () => {
         //console.log(login)
         setMuokattavaLogin(login)
         setMuokkaustila(true)
-
     }
 
-  return(
-      <>
+        //////Jos ei ole adminkäyttäjä tulee aina tämä näkymä////////////
+    if (!admin) {
+        return (<h2>Sorry, this page is for admin users only</h2>)
+    }
 
-    <h1><nobr style={{ cursor: 'pointer'}} 
+     // Jos logineja ei ole ehtinyt tulla kannasta stateen, mutta on adminkäyttäjä
+    if (!lisäysTila && admin && logins.length === 0) {
+        return (<>
+            <h1><nobr> Logins</nobr>
+
+                <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
+            { showMessage &&
+                <Message message={message} isPositive={isPositive} />
+            }
+            <p>Loading...</p>
+        </>)
+    }
+
+    // Jos kirjautuneena on adminkäyttäjä ja statessa on jo kannasta saapuneet loginit ja lisäystilakin on pois päältä
+    if (!lisäysTila && admin && logins) {
+        return (
+            <>
+                
+                 <h1><nobr style={{ cursor: 'pointer'}} 
       onClick={() => setNäytetäänkö(!näytetäänkö)}>Users</nobr>
 
-    <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
+      <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
 
-    {!lisäysTila && !muokkausTila &&
+     {!lisäysTila && !muokkausTila &&
        <input placeholder="Search by Firstname" value={search} onChange={handleSeachInputChange}/>
     }
 
@@ -121,18 +153,64 @@ const LoginList = () => {
               handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick}/>
           )
         }
-      }   
-      )
+      }  
+          )
     }
-      {!logins && <p>Loading...</p>}
+            </>
 
-      {lisäysTila === true && <LoginAdd setLisäystila={setLisäystila}  logins={logins} setLogins={setLogins} setMessage={setMessage} setShowMessage={setShowMessage}
-                setIsPositive={setIsPositive}/>}
+        )
+    }
 
-      {muokkausTila && <LoginEdit setMuokkaustila={setMuokkaustila} muokattavaLogin={muokattavaLogin} logins={logins} setLogins={setLogins} setMessage={setMessage} setShowMessage={setShowMessage}
-                setIsPositive={setIsPositive} />}
-      </>
-  )
+    if (lisäysTila && admin) {
+        return (<>
+            <h1>Logins</h1>
+            { showMessage &&
+                <Message message={message} isPositive={isPositive} />
+            }
+            <LoginAdd setLisäystila={setLisäystila} logins={logins} setLogins={setLogins} setMessage={setMessage} setShowMessage={setShowMessage}
+                setIsPositive={setIsPositive} />
+        </>
+        )
+    }
+
+    //ALLA VANHA KOODI !!!
+
+  // return(
+  //     <>
+
+  //   <h1><nobr style={{ cursor: 'pointer'}} 
+  //     onClick={() => setNäytetäänkö(!näytetäänkö)}>Users</nobr>
+
+  //   <button className="nappi" onClick={() => setLisäystila(true)}>Add new</button></h1>
+
+  //   {!lisäysTila && !muokkausTila &&
+  //      <input placeholder="Search by Firstname" value={search} onChange={handleSeachInputChange}/>
+  //   }
+
+  //   { showMessage &&
+  //       <Message message={message} isPositive={isPositive}/>
+  //   }
+
+  //   {logins && näytetäänkö && !lisäysTila && !muokkausTila  && logins.map(login =>{
+  //     const caseInsensName = login.firstname.toLowerCase()
+  //       if (caseInsensName.indexOf(search) > -1) {
+  //         return (
+  //           <Login key={login.loginId} login={login} 
+  //             handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick}/>
+  //         )
+  //       }
+  //     }   
+  //     )
+  //   }
+  //     {!logins && <p>Loading...</p>}
+
+  //     {lisäysTila === true && <LoginAdd setLisäystila={setLisäystila}  logins={logins} setLogins={setLogins} setMessage={setMessage} setShowMessage={setShowMessage}
+  //               setIsPositive={setIsPositive}/>}
+
+  //     {muokkausTila && <LoginEdit setMuokkaustila={setMuokkaustila} muokattavaLogin={muokattavaLogin} logins={logins} setLogins={setLogins} setMessage={setMessage} setShowMessage={setShowMessage}
+  //               setIsPositive={setIsPositive} />}
+  //     </>
+  // )
 
    
 }
