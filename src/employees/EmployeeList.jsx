@@ -121,7 +121,7 @@ const EmployeeList = () => {
     }
 
     
-    {employees && näytetäänkö && !lisäysTila && !muokkausTila  && employees.map(employee =>{
+    {employees.length>0 && näytetäänkö && !lisäysTila && !muokkausTila  && employees.map(employee =>{
       const lowerCaseName = employee.firstName.toLowerCase()
         if (lowerCaseName.indexOf(search) > -1) {
           return (

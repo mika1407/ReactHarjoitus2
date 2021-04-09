@@ -5,11 +5,12 @@ import EmployeeService from '../services/employee'
 const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, setShowMessage,
     setIsPositive, muokattavaEmployee }) => {
 
+       // console.log(muokattavaEmployee)
     // State määritykset
 
     const [newEmployeeId, setNewEmployeeId] = useState(muokattavaEmployee.employeeId)
-    const [newLastname, setNewLastname] = useState(muokattavaEmployee.lastname)
-    const [newFirstname, setNewFirstname] = useState(muokattavaEmployee.firstname)
+    const [newLastname, setNewLastname] = useState(muokattavaEmployee.lastName)
+    const [newFirstname, setNewFirstname] = useState(muokattavaEmployee.firstName)
     //const [newTitle, setNewTitle] = useState(muokattavaEmployee.title) 
     const [newTitleOfCourtesy, setNewTitleOfCourtesy] = useState(muokattavaEmployee.titleOfCourtesy)
     const [newBirthDate, setNewBirthDate] = useState(muokattavaEmployee.birthDate)
@@ -22,7 +23,8 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
     const [newCountry, setNewCountry] = useState(muokattavaEmployee.country) 
     const [newHomePhone, setNewHomePhone] = useState(muokattavaEmployee.homePhone) 
   
-  
+        console.log(typeof(muokattavaEmployee.birthDate))
+        console.log(muokattavaEmployee.birthDate)
 
     // Muokkauslomakkeen onSubmit tapahtumankäsittelijä
 
@@ -32,12 +34,12 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
           //console.log()
 
         var changedEmployee = {
-            lastname: newLastname,
-            firstname: newFirstname, 
+            lastName: newLastname,
+            firstName: newFirstname, 
             //title: newTitle,
-            titleofcourtesy: newTitleOfCourtesy,
-            birthdate: newBirthDate,
-            hiredate: newHireDate,
+            titleOfCourtesy: newTitleOfCourtesy,
+            birthDate: newBirthDate,
+            hireDate: newHireDate,
             address: newAddress,
             city: newCity,
             region: newRegion,
@@ -47,7 +49,7 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
      
         }
 
-          //console.log(changedEmployee)
+          console.log(changedEmployee)
 
     const id = muokattavaEmployee.employeeId
     // Lähetetään servicelle token ennen kuin tehdään update pyyntö serviceen
@@ -69,7 +71,7 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
                 setEmployees(employees.concat(changedEmployee))
 
                 //console.log(typeof(newUnitPrice))
-                setMessage(`Päivitetty ${changedEmployee.firstname}`)
+                setMessage(`Päivitetty ${changedEmployee.firstName}`)
                 setIsPositive(true)
                 setShowMessage(true)
                 window.scrollBy(0, -10000) // Scrollataan ylös jotta nähdään alert
@@ -112,11 +114,11 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
                 <input type="text" value={newEmployeeId} readOnly/>
             </div>
             <div>
-                <input type="text" value={newLastname} placeholder="Lastname"
+                <input type="text" value={newLastname || ''} placeholder="Lastname"
                     onChange={({ target }) => setNewLastname(target.value)} required />
             </div>
             <div>
-                <input type="text" value={newFirstname} placeholder="Firstname"
+                <input type="text" value={newFirstname || ''} placeholder="Firstname"
                     onChange={({ target }) => setNewFirstname(target.value)} required/>
             </div>
             {/* <div>
@@ -128,12 +130,12 @@ const EmployeeEdit = ({ setMuokkaustila, setEmployees, employees, setMessage, se
                     onChange={({ target }) => setNewTitleOfCourtesy(target.value)} />
             </div>
             <div>
-                <input type="date" value={newBirthDate} placeholder="BirthDate"
-                    onChange={({ target }) => setNewBirthDate(target.value)} />
+                <input type="text" value={newBirthDate} placeholder="BirthDate"
+                    onChange={({ target }) => setNewBirthDate(target.value)} required/>
             </div>
             <div>
-                <input type="date" value={newHireDate} placeholder="HireDate"
-                    onChange={({ target }) => setNewHireDate(target.value)} />
+                <input type="text" value={newHireDate} placeholder="HireDate"
+                    onChange={({ target }) => setNewHireDate(target.value)} required/>
             </div>
             <div>
                 <input type="text" value={newAddress} placeholder="Address"
